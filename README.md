@@ -6,14 +6,27 @@ hosts and hostgroups.
 ## Install
 
 ```sh
-brew tap rtulke/snooze
-brew install snooze
+brew install rtulke/snooze/snooze
 ```
+
+The fully qualified name is required. Homebrew's core repository already ships an
+unrelated tool also called [`snooze`](https://github.com/leahneukirchen/snooze) — a small
+cron replacement — and core takes precedence over a tap for a bare formula name, so
+`brew install snooze` installs *that* one even after `brew tap rtulke/snooze`.
+
+If `snooze help` hangs instead of printing help, you have the other tool:
+
+```sh
+brew uninstall snooze               # removes homebrew-core's snooze
+brew install rtulke/snooze/snooze
+```
+
+Both provide a `snooze` binary, so only one can be linked at a time.
 
 ## Upgrade
 
 ```sh
-brew update && brew upgrade snooze
+brew update && brew upgrade rtulke/snooze/snooze
 ```
 
 ## Usage
@@ -22,7 +35,7 @@ snooze needs a Zabbix API token before it can do anything beyond
 `--help`/`--version`:
 
 ```sh
-cp "$(brew --prefix snooze)/share/doc/snooze/snooze.conf.example" ~/.snooze.conf
+cp "$(brew --prefix rtulke/snooze/snooze)/share/doc/snooze/snooze.conf.example" ~/.snooze.conf
 $EDITOR ~/.snooze.conf   # set url + token
 ```
 
